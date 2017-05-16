@@ -36,6 +36,18 @@
 	'use strict';
 	function define_IWC() {
 		var IWC = {};
+
+		IWC.Intent = function name(sender, receiver, action, data, global) {
+			this.sender = sender;
+			this.receiver = receiver;
+			this.data = data;
+			this.dataType = "text/xml";
+			this.action = action;
+			this.categories = ["", ""];
+			this.flags = [global ? "PUBLISH_GLOBAL" : "PUBLISH_LOCAL"];
+			this.extras = {};	
+		};
+
 		IWC.Client = function (categories) {
 
 			this._componentName = "unknown";
@@ -55,7 +67,7 @@
 				}
 				if (typeof query.url === "string") {
 					this._componentName = query.url;
-				}				
+				}
 			}
 
 			//private variables
@@ -92,11 +104,11 @@
 		 */
 		IWC.Client.prototype.publish = function (intent) {
 			if (IWC.util.validateIntent(intent)) {
-				if(intent.flags[0] === IWC.util.FLAGS.PUBLISH_GLOBAL){
+				if (intent.flags[0] === IWC.util.FLAGS.PUBLISH_GLOBAL) {
 					//TODO: global
 				} else if (intent.flags[0] === IWC.util.FLAGS.PUBLISH_LOCAL) {
 					publishLocal(intent);
-				}			
+				}
 			}
 		};
 

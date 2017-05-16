@@ -140,16 +140,9 @@ Las2peerWidgetLibrary.prototype.sendIntent = function(sender, receiver, action, 
   if (global === null) {
     global = true;
   }
-  var intent = {
-    "sender": sender,
-    "receiver" : receiver,
-    "data": data,
-    "dataType": "text/xml",
-    "action": action,
-    "categories": ["", ""],
-    "flags": [global ? "PUBLISH_GLOBAL" : "PUBLISH_LOCAL"],
-    "extras": {}
-  };
+
+  var intent = new IWC.Intent(sender, receiver, action, data, global);
+
   //console.log(intent);
   this.iwcClient.publish(intent);
 };
