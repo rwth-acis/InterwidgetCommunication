@@ -35,8 +35,9 @@
  * IWC-callback function
  * @param {string} endpointUrl - endpoint URL for the respective microservice of the widget if it has one
  * @param {function} iwcCallback - The callback used for interwidget communication.
+ * @param {string} origin - The origin (i.e. the url where your application script lives) is needed for messaging
  */
-function Las2peerWidgetLibrary(endpointUrl, iwcCallback) {
+function Las2peerWidgetLibrary(endpointUrl, iwcCallback, origin) {
   // care for widget frontends without a microservice backend
   if (endpointUrl === null) {
     endpointUrl = "not specified";
@@ -47,7 +48,7 @@ function Las2peerWidgetLibrary(endpointUrl, iwcCallback) {
   } else {
     this._serviceEndpoint = endpointUrl;
   }
-  this.iwcClient = new IWC.Client();
+  this.iwcClient = new IWC.Client(null, origin);
   this.callback = iwcCallback;
   this.iwcClient.connect(this.callback);
 }

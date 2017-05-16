@@ -48,7 +48,7 @@
 			this.extras = {};	
 		};
 
-		IWC.Client = function (categories) {
+		IWC.Client = function (categories, origin) {
 
 			this._componentName = "unknown";
 
@@ -74,6 +74,9 @@
 			this._connected = false;
 			this._categories = categories;
 			this._callback = null;
+
+			// Needed for HTML5 messaging
+			this._origin = origin;
 
 			//onIntent is called when an intent is received. A JSON intent object is passed to the function
 			this.onIntent = function () { };
@@ -119,7 +122,7 @@
 			frames.each(function () {
 				if ($(this).contents().find("head").find("title").text() === intent.receiver) {
 					//alert("Posting message");
-					this.contentWindow.postMessage(intent, "http://127.0.0.1:8073");
+					this.contentWindow.postMessage(intent, IWC.Client.origin);
 				}
 			});
 		};
