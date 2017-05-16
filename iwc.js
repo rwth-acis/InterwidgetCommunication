@@ -36,7 +36,7 @@
 	'use strict';
 	function define_IWC() {
 		var IWC = {};
-		iwc.Client = function (categories) {
+		IWC.Client = function (categories) {
 
 			this._componentName = "unknown";
 
@@ -55,8 +55,7 @@
 				}
 				if (typeof query.url === "string") {
 					this._componentName = query.url;
-				}
-				//console.log("COMPONENT NAME " + this._componentName);
+				}				
 			}
 
 			//private variables
@@ -73,7 +72,7 @@
 		 * an event listener for HTML5 messaging.
 		 * @param {function} callback - The callback function used for receiving messages.
 		 */
-		iwc.Client.prototype.connect = function (callback) {
+		IWC.Client.prototype.connect = function (callback) {
 			this._callback = callback;
 			window.addEventListener('message', callback, false);
 		};
@@ -82,20 +81,23 @@
 		 * Disconnect the widget from messaging. This removes the event listener
 		 * and the callback.
 		 */
-		iwc.Client.prototype.disconnect = function () {
+		IWC.Client.prototype.disconnect = function () {
 			window.removeEventListener('message', this._callback, false);
 			this._callback = null;
 		};
 
-		// first send locally, if flag iwc.util.FLAGS is set send via yjs
 		/**
 		 * Publishes an intent, 
 		 * @param {intent} - The intent about to be published, this object contains all information.
 		 */
-		iwc.Client.prototype.publish = function (intent) {
-			if (iwc.util.validateIntent(intent)) {
-				//var envelope = {"type":"JSON", "event":"publish", "message":intent};
-				publishLocal(intent);
+		IWC.Client.prototype.publish = function (intent) {
+			if (IWC.util.validateIntent(intent)) {
+				//console.log(intent.flags);
+				if(intent.flags.PUBLISH_GLOBAL){
+					//TODO: global
+				} else {
+					publishLocal(intent);
+				}			
 			}
 		};
 
@@ -111,15 +113,15 @@
 			});
 		};
 
-		//======================= iwc.util ==============================
-		iwc.util = function () {
+		//======================= IWC.util ==============================
+		IWC.util = function () {
 		};
 
 		/**
 		 * Used to determine whether global or local messaging should be used.
 		 * Local messaging uses HTML5 messaging, global messaging uses yjs.
 		 */
-		iwc.util.FLAGS = {
+		IWC.util.FLAGS = {
 			PUBLISH_LOCAL: "PUBLISH_LOCAL",
 			PUBLISH_GLOBAL: "PUBLISH_GLOBAL"
 		};
@@ -127,7 +129,7 @@
 		/**
 		 * Check intent for correctness.
 		 */
-		iwc.util.validateIntent = function (intent) {
+		IWC.util.validateIntent = function (intent) {
 			if (typeof intent.sender != "string") {
 				throw new Error("Intent object must possess property 'component' of type 'String'");
 			}
