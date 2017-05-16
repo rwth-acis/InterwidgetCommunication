@@ -81,7 +81,7 @@ function Las2peerWidgetLibrary(endpointUrl, iwcCallback) {
  */
 Las2peerWidgetLibrary.prototype.sendRequest = function(method, relativePath,
         content, mime, customHeaders, authenticate, successCallback, errorCallback) {
-  var mtype = "text/plain; charset=UTF-8"
+  var mtype = "text/plain; charset=UTF-8";
   if (mime !== 'undefined') {
     mtype = mime;
   }
@@ -98,7 +98,7 @@ Las2peerWidgetLibrary.prototype.sendRequest = function(method, relativePath,
     error: function(xhr, errorType, error) {
       console.log(error);
       var errorText = error;
-      if (xhr.responseText != null && xhr.responseText.trim().length > 0) {
+      if (xhr.responseText !== null && xhr.responseText.trim().length > 0) {
         errorText = xhr.responseText;
       }
       errorCallback(errorText);
@@ -114,10 +114,10 @@ Las2peerWidgetLibrary.prototype.sendRequest = function(method, relativePath,
   }
   if (authenticate === true) {
     console.log("Authenticated request...");
-    var tokenHeader = { 'access_token': window.localStorage["access_token"] }
+    var tokenHeader = { 'access_token': window.localStorage.access_token };
     $.extend(ajaxObj.headers, tokenHeader);
     //%%something%% placeholders can be replaced with the code generation service
-    var endPointHeader = { 'oidc_provider': 'https://api.learning-layers.eu/o/oauth2' }
+    var endPointHeader = { 'oidc_provider': 'https://api.learning-layers.eu/o/oauth2' };
     $.extend(ajaxObj.headers, endPointHeader);
   } else {
     console.log("Anonymous request...");
@@ -130,7 +130,7 @@ Las2peerWidgetLibrary.prototype.sendRequest = function(method, relativePath,
  * If global is true broadcast via yjs otherwise send directly to specified receiver
  */
 Las2peerWidgetLibrary.prototype.sendIntent = function(sender, receiver, action, data, global) {
-  if (global == null) {
+  if (global === null) {
     global = true;
   }
   var intent = {
