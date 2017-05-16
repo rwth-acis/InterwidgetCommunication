@@ -92,10 +92,9 @@
 		 */
 		IWC.Client.prototype.publish = function (intent) {
 			if (IWC.util.validateIntent(intent)) {
-				//console.log(intent.flags);
-				if(intent.flags.PUBLISH_GLOBAL){
+				if(intent.flags[0] === IWC.util.FLAGS.PUBLISH_GLOBAL){
 					//TODO: global
-				} else {
+				} else if (intent.flags[0] === IWC.util.FLAGS.PUBLISH_LOCAL) {
 					publishLocal(intent);
 				}			
 			}

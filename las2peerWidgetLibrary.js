@@ -147,7 +147,7 @@ Las2peerWidgetLibrary.prototype.sendIntent = function(sender, receiver, action, 
     "dataType": "text/xml",
     "action": action,
     "categories": ["", ""],
-    "flags": [global ? "PUBLISH_GLOBAL" : void 0],
+    "flags": [global ? "PUBLISH_GLOBAL" : "PUBLISH_LOCAL"],
     "extras": {}
   };
   //console.log(intent);
