@@ -33,6 +33,8 @@
 /**
  * Instantiates a new Las2peerWidgetLibrary, given its endpoint URL and the
  * IWC-callback function
+ * @param {string} endpointUrl - endpoint URL for the respective microservice of the widget if it has one
+ * @param {function} iwcCallback - The callback used for interwidget communication.
  */
 function Las2peerWidgetLibrary(endpointUrl, iwcCallback) {
   // care for widget frontends without a microservice backend
@@ -127,7 +129,12 @@ Las2peerWidgetLibrary.prototype.sendRequest = function(method, relativePath,
 
 /**
  * Sends an intent
- * If global is true broadcast via yjs otherwise send directly to specified receiver
+ * If global is true broadcast via yjs otherwise send directly to specified receiver.
+ * @param {string} sender - The identifier of the sending widget
+ * @param {string} receiver - The identifier of the target to receive the message
+ * @param {string} action - The action to perform
+ * @param {object} data - Data to be send with the message
+ * @param {string} global - Flag whether the intent is for local or global broadcast
  */
 Las2peerWidgetLibrary.prototype.sendIntent = function(sender, receiver, action, data, global) {
   if (global === null) {
@@ -149,6 +156,7 @@ Las2peerWidgetLibrary.prototype.sendIntent = function(sender, receiver, action, 
 
 /**
  * Convenience function to check if a String ends with a given suffix.
+ * @param {string} suffix - The suffix to check for.
  */
 String.prototype.endsWith = function(suffix) {
   return this.indexOf(suffix, this.length - suffix.length) !== -1;
