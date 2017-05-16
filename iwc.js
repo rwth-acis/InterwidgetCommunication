@@ -91,19 +91,23 @@ iwc.Client.prototype.disconnect = function() {
  */
 iwc.Client.prototype.publish = function(intent) {
 	if (iwc.util.validateIntent(intent)) {
-		var envelope = {"type":"JSON", "event":"publish", "message":intent};
-
-		//Find iframe and post message
-		alert("Sender: " + intent.sender);
-		var frames = $(".widget",parent.document).find("iframe");
-		frames.each(function(){
-			if ($(this).contents().find("head").find("title").text() === intent.sender) {
-				alert("Posting message");
-				this.contentWindow.postMessage("The message to send.", "http://127.0.0.1:8073");
-			}			
-		});
+		//var envelope = {"type":"JSON", "event":"publish", "message":intent};
+		publishLocal(intent);		
 	}
 };
+
+var publishLocal = function(intent) {
+	//Find iframe and post message
+	//alert("Sender: " + intent.sender);
+	var frames = $(".widget",parent.document).find("iframe");
+	frames.each(function(){
+		if ($(this).contents().find("head").find("title").text() === intent.receiver) {
+			//alert("Posting message");
+			this.contentWindow.postMessage(intent, "http://127.0.0.1:8073");
+		}			
+	});
+};
+
 //======================= iwc.util ==============================
 iwc.util = function() {
 };

@@ -150,7 +150,7 @@ Las2peerWidgetLibrary.prototype.sendIntent = function(sender, receiver, action, 
     "flags": [global ? "PUBLISH_GLOBAL" : void 0],
     "extras": {}
   };
-  console.log(intent);
+  //console.log(intent);
   this.iwcClient.publish(intent);
 };
 
