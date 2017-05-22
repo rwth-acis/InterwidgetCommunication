@@ -54,8 +54,11 @@ function Las2peerWidgetLibrary(endpointUrl, iwcCallback, origin) {
     console.error("Origin not set, local messaging will not work!");
   }
 
+  //Create a client for interwidget communication
   this.iwcClient = new IWC.Client(null, origin);
+  //Define your callback, the callback will receive intent objects
   this.callback = iwcCallback;
+  //Bind the callback
   this.iwcClient.connect(iwcCallback);
 }
 
@@ -147,10 +150,7 @@ Las2peerWidgetLibrary.prototype.sendIntent = function (sender, receiver, action,
   if (global === null) {
     global = true;
   }
-
   var intent = new IWC.Intent(sender, receiver, action, data, global);
-
-  //console.log(intent);
   this.iwcClient.publish(intent);
 };
 
