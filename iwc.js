@@ -108,7 +108,7 @@
 		IWC.Client.prototype.publish = function (intent) {
 			if (IWC.util.validateIntent(intent)) {
 				if (intent.flags[0] === IWC.util.FLAGS.PUBLISH_GLOBAL) {
-					//TODO: global
+					publishGlobal(intent);
 				} else if (intent.flags[0] === IWC.util.FLAGS.PUBLISH_LOCAL) {
 					publishLocal(intent, this._origin);
 				}
@@ -126,6 +126,10 @@
 					this.contentWindow.postMessage(intent, origin);
 				}
 			});
+		};
+
+		var publishGlobal = function (intent) {
+			//TODO: Extend stub
 		};
 
 		/**
