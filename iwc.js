@@ -45,7 +45,7 @@
 			this.action = action;
 			this.categories = ["", ""];
 			this.flags = [global ? "PUBLISH_GLOBAL" : "PUBLISH_LOCAL"];
-			this.extras = {};	
+			this.extras = {};
 		};
 
 		IWC.Client = function (categories, origin) {

@@ -88,8 +88,8 @@ function Las2peerWidgetLibrary(endpointUrl, iwcCallback, origin) {
  *          failed. Expects one parameter "error" representing the error
  *          occurred.
  */
-Las2peerWidgetLibrary.prototype.sendRequest = function(method, relativePath,
-        content, mime, customHeaders, authenticate, successCallback, errorCallback) {
+Las2peerWidgetLibrary.prototype.sendRequest = function (method, relativePath,
+  content, mime, customHeaders, authenticate, successCallback, errorCallback) {
   var mtype = "text/plain; charset=UTF-8";
   if (mime !== 'undefined') {
     mtype = mime;
@@ -104,7 +104,7 @@ Las2peerWidgetLibrary.prototype.sendRequest = function(method, relativePath,
     contentType: mtype,
     crossDomain: true,
     headers: {},
-    error: function(xhr, errorType, error) {
+    error: function (xhr, errorType, error) {
       console.log(error);
       var errorText = error;
       if (xhr.responseText !== null && xhr.responseText.trim().length > 0) {
@@ -112,7 +112,7 @@ Las2peerWidgetLibrary.prototype.sendRequest = function(method, relativePath,
       }
       errorCallback(errorText);
     },
-    success: function(data, status, xhr) {
+    success: function (data, status, xhr) {
       var type = xhr.getResponseHeader("Content-Type");
       successCallback(data, type);
     },
@@ -143,7 +143,7 @@ Las2peerWidgetLibrary.prototype.sendRequest = function(method, relativePath,
  * @param {object} data - Data to be send with the message
  * @param {string} global - Flag whether the intent is for local or global broadcast
  */
-Las2peerWidgetLibrary.prototype.sendIntent = function(sender, receiver, action, data, global) {
+Las2peerWidgetLibrary.prototype.sendIntent = function (sender, receiver, action, data, global) {
   if (global === null) {
     global = true;
   }
@@ -158,6 +158,6 @@ Las2peerWidgetLibrary.prototype.sendIntent = function(sender, receiver, action, 
  * Convenience function to check if a String ends with a given suffix.
  * @param {string} suffix - The suffix to check for.
  */
-String.prototype.endsWith = function(suffix) {
+String.prototype.endsWith = function (suffix) {
   return this.indexOf(suffix, this.length - suffix.length) !== -1;
 };
