@@ -110,19 +110,19 @@
 				if (intent.flags[0] === IWC.util.FLAGS.PUBLISH_GLOBAL) {
 					//TODO: global
 				} else if (intent.flags[0] === IWC.util.FLAGS.PUBLISH_LOCAL) {
-					publishLocal(intent);
+					publishLocal(intent, this._origin);
 				}
 			}
 		};
 
-		var publishLocal = function (intent) {
+		var publishLocal = function (intent, origin) {
 			//Find iframe and post message
 			//alert("Sender: " + intent.sender);
 			var frames = $(".widget", parent.document).find("iframe");
 			frames.each(function () {
 				if ($(this).contents().find("head").find("title").text() === intent.receiver) {
 					//alert("Posting message");
-					this.contentWindow.postMessage(intent, IWC.Client.origin);
+					this.contentWindow.postMessage(intent, origin);
 				}
 			});
 		};

@@ -48,6 +48,12 @@ function Las2peerWidgetLibrary(endpointUrl, iwcCallback, origin) {
   } else {
     this._serviceEndpoint = endpointUrl;
   }
+
+  //Check origin
+  if (origin === undefined) {
+    console.error("Origin not set, local messaging will not work!");
+  }
+
   this.iwcClient = new IWC.Client(null, origin);
   this.callback = iwcCallback;
   this.iwcClient.connect(this.callback);
