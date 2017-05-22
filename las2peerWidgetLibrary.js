@@ -56,7 +56,7 @@ function Las2peerWidgetLibrary(endpointUrl, iwcCallback, origin) {
 
   this.iwcClient = new IWC.Client(null, origin);
   this.callback = iwcCallback;
-  this.iwcClient.connect(this.callback);
+  this.iwcClient.connect(iwcCallback);
 }
 
 /**

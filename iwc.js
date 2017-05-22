@@ -77,10 +77,9 @@
 
 			// Needed for HTML5 messaging
 			this._origin = origin;
-
-			//onIntent is called when an intent is received. A JSON intent object is passed to the function
-			this.onIntent = function () { };
 		};
+
+
 
 		/**
 		 * Connect widget to messaging. This sets up the callback function and creates
@@ -89,7 +88,8 @@
 		 */
 		IWC.Client.prototype.connect = function (callback) {
 			this._callback = callback;
-			window.addEventListener('message', callback, false);
+			var handler = receiveMessage.bind(this);
+			window.addEventListener('message', handler, false);
 		};
 
 		/**
@@ -97,7 +97,7 @@
 		 * and the callback.
 		 */
 		IWC.Client.prototype.disconnect = function () {
-			window.removeEventListener('message', this._callback, false);
+			window.removeEventListener('message', receiveMessage, false);
 			this._callback = null;
 		};
 
@@ -118,6 +118,7 @@
 		var publishLocal = function (intent, origin) {
 			//Find iframe and post message
 			//alert("Sender: " + intent.sender);
+			console.log(intent);
 			var frames = $(".widget", parent.document).find("iframe");
 			frames.each(function () {
 				if ($(this).contents().find("head").find("title").text() === intent.receiver) {
@@ -125,6 +126,23 @@
 					this.contentWindow.postMessage(intent, origin);
 				}
 			});
+		};
+
+		/**
+		 * Unpack events and pre process them
+		 * @param {Event} event - The event that activated the callback
+		 */
+		var receiveMessage = function (event) {
+			console.log(event);
+			if (event.type === "message") {
+				//Unpack message events
+				//alert(event);
+				if (event instanceof MessageEvent) {
+					console.log(event);
+					//event.data contains the intent object
+					this._callback(event.data);
+				}
+			}
 		};
 
 		//======================= IWC.util ==============================
