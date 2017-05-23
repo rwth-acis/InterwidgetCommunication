@@ -35,7 +35,7 @@
 	function define_IWC() {
 		var IWC = {};
 		
-		IWC.Intent = function name(sender, receiver, action, data, global) {
+		IWC.Intent = function (sender, receiver, action, data, global) {
 			this.sender = sender;
 			this.receiver = receiver;
 			this.data = data;
@@ -91,7 +91,8 @@
 
 			if (!(this._y === null || this._y === undefined )) {
 				// If yjs is available also connect a global listener
-				this._y.share.intents.observe(handler);
+				if (this._y.share.intents !== undefined)
+					this._y.share.intents.observe(handler);
 			}
 		};
 
@@ -134,7 +135,8 @@
 		};
 
 		var publishGlobal = function (intent, y) {
-			y.share.intents.push(intent);
+			//y.share.intents.push(intent);
+			y.share.intents.set(0, intent);
 		};
 
 		/**
@@ -142,12 +144,12 @@
 		 * @param {Event} event - The event that activated the callback
 		 */
 		var receiveMessage = function (event) {
-			console.log(event);
+			//console.log(event);
 			// Local messaging events
 			if (event.type === "message") {
 				//Unpack message events
 				if (event instanceof MessageEvent) {
-					console.log(event);
+					//console.log(event);
 					this._callback(event.data);
 				}
 			} else if (event.type === "insert") {
