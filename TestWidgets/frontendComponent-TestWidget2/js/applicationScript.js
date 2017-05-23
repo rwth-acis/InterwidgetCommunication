@@ -29,9 +29,6 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-
-var client;
-
 var init = function () {
 
   Y({
@@ -55,7 +52,6 @@ var init = function () {
 
 var iwcCallback = function (intent) {
   // define your reactions on incoming iwc events here 
-  //console.log(intent);
   if (intent.action == "update" && intent.receiver == $("head").find("title")[0].text) {
     updateContent(intent.data);
   }
@@ -63,7 +59,6 @@ var iwcCallback = function (intent) {
 
 // updateContent
 var updateContent = function (data) {
-  //alert(data);
   var content = document.getElementById('textArea').value = data;
 };
 

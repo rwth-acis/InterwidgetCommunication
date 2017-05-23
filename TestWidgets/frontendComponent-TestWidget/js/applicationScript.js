@@ -35,7 +35,9 @@ var client;
 var init = function () {
 
   sendContent.bind(this);
+  sendContentGlobally.bind(this);
   $("#sendBtn").click(sendContent);
+  $("#sendGlobalBtn").click(sendContentGlobally);
 
   Y({
     db: {
@@ -79,6 +81,12 @@ var sendContent = function () {
   //Send locally to widget with title "ReceiveWidget"
   client.sendIntent(sender, "ReceiveWidget", "update", content, false);
 };
+
+var sendContentGlobally = function () {
+  var content = document.getElementById('textArea').value;
+  var sender = $("head").find("title")[0].text;
+  client.sendIntent(sender, "ReceiveWidget", "update", content, true);
+}
 
 // updateContent
 var updateContent = function (content) {

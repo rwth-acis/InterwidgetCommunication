@@ -94,7 +94,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
     
 <textarea id='textArea' class="form-control" rows="5"> </textarea>
-<button id='sendBtn' class="form-control">Send</button>
+<button id='sendBtn' class="form-control">Send locally</button>
+<button id='sendGlobalBtn' class="form-control">Send globally</button>
  
  
   </div>
