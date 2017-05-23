@@ -105,7 +105,7 @@
 			this._callback = null;
 
 			if (!(this._y === null || this._y === undefined)) {
-				this._y.share.intents.unobserver(receiveMessage);
+				this._y.share.intents.unobserve(receiveMessage);
 			}
 		};
 
@@ -136,7 +136,7 @@
 
 		var publishGlobal = function (intent, y) {
 			//y.share.intents.push(intent);
-			y.share.intents.set(0, intent);
+			y.share.intents.set(intent.receiver, intent);
 		};
 
 		/**
@@ -152,9 +152,12 @@
 					//console.log(event);
 					this._callback(event.data);
 				}
-			} else if (event.type === "insert") {
-				//Unpack yjs event
-				alert(event);
+			} else if (event.type === "add" || event.type == "update") {
+				//Unpack yjs event and remove from map
+				var intent = event.object.get(event.name);
+				event.object.delete(event.name);
+				console.log(intent);
+				this._callback(intent);
 			}
 		};
 
