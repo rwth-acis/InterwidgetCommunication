@@ -30,13 +30,11 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 // WIP re-implementation
-
 (function (window) {
-
 	'use strict';
 	function define_IWC() {
 		var IWC = {};
-
+		
 		IWC.Intent = function name(sender, receiver, action, data, global) {
 			this.sender = sender;
 			this.receiver = receiver;
@@ -48,8 +46,10 @@
 			this.extras = {};
 		};
 
-		IWC.Client = function (categories, origin) {
+		IWC.Client = function (categories, origin, y) {
 
+			//console.log(y);
+			this._y = y;
 			this._componentName = "unknown";
 
 			if (typeof window.location !== "undefined" &&
@@ -79,8 +79,6 @@
 			this._origin = origin;
 		};
 
-
-
 		/**
 		 * Connect widget to messaging. This sets up the callback function and creates
 		 * an event listener for HTML5 messaging.
@@ -90,6 +88,11 @@
 			this._callback = callback;
 			var handler = receiveMessage.bind(this);
 			window.addEventListener('message', handler, false);
+
+			if (!(this._y === null || this._y === undefined )) {
+				// If yjs is available also connect a global listener
+				this._y.share.intents.observe(handler);
+			}
 		};
 
 		/**
@@ -99,6 +102,10 @@
 		IWC.Client.prototype.disconnect = function () {
 			window.removeEventListener('message', receiveMessage, false);
 			this._callback = null;
+
+			if (!(this._y === null || this._y === undefined)) {
+				this._y.share.intents.unobserver(receiveMessage);
+			}
 		};
 
 		/**
@@ -108,7 +115,7 @@
 		IWC.Client.prototype.publish = function (intent) {
 			if (IWC.util.validateIntent(intent)) {
 				if (intent.flags[0] === IWC.util.FLAGS.PUBLISH_GLOBAL) {
-					publishGlobal(intent);
+					publishGlobal(intent, this._y);
 				} else if (intent.flags[0] === IWC.util.FLAGS.PUBLISH_LOCAL) {
 					publishLocal(intent, this._origin);
 				}
@@ -117,19 +124,17 @@
 
 		var publishLocal = function (intent, origin) {
 			//Find iframe and post message
-			//alert("Sender: " + intent.sender);
 			console.log(intent);
 			var frames = $(".widget", parent.document).find("iframe");
 			frames.each(function () {
 				if ($(this).contents().find("head").find("title").text() === intent.receiver) {
-					//alert("Posting message");
 					this.contentWindow.postMessage(intent, origin);
 				}
 			});
 		};
 
-		var publishGlobal = function (intent) {
-			//TODO: Extend stub
+		var publishGlobal = function (intent, y) {
+			y.share.intents.push(intent);
 		};
 
 		/**
@@ -138,14 +143,16 @@
 		 */
 		var receiveMessage = function (event) {
 			console.log(event);
+			// Local messaging events
 			if (event.type === "message") {
 				//Unpack message events
-				//alert(event);
 				if (event instanceof MessageEvent) {
 					console.log(event);
-					//event.data contains the intent object
 					this._callback(event.data);
 				}
+			} else if (event.type === "insert") {
+				//Unpack yjs event
+				alert(event);
 			}
 		};
 
