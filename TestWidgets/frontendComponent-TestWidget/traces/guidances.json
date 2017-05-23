@@ -1,0 +1,28 @@
+{
+  "guidances":[
+    {
+      "type" : "HTML Element",
+      "regex" : "<[^>]+\\s+(id=[\"'][^\"']*[\"'])[^>]*>",
+      "group" : 1,
+      "message" : "All HTML elements with ids need to be defined in the model. Nested HTML model elements are currently not supported."
+    },
+    {
+      "type" : "ApplicationScript",
+      "regex" : "client\.sendIntent\([^\)]*\)",
+      "group" : 0,
+      "message": "IWC calls must be defined in the model. Please remove the IWC call from the source code and define it in the model canvas."
+    },
+    {
+      "type" : "ApplicationScript",
+      "regex" : "client\.sendRequest\([^\)]*\)",
+      "group" : 0,
+      "message": "Microservice calls must be defined in the model. Please remove the microservice call from the source code and define it in the model canvas."
+    },
+    {
+      "type" : "ApplicationScript",
+      "regex" : "\$\([\"']#[^\"']*[\"']\).on\([^\)]*\)",
+      "group" : 0,
+      "message": "Events must be defined in the model. Please remove your event from the source code and define it in the model canvas."
+    }
+  ]
+}
