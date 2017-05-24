@@ -77,7 +77,7 @@ client.sendIntent(sender, "ReceiveWidget", "update", content, true);
 Initialise the client.
 For global messaging, you have to set up y-js in the same way. 
 Then define your callback and execute further actions, e.g. like this:
-```
+```javascript
 var iwcCallback = function (intent) {
   // define your reactions on incoming iwc events here 
   if (intent.action == "update" && intent.receiver == $("head").find("title")[0].text) {
