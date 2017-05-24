@@ -2,6 +2,7 @@
 This repository contains JS libraries for interwidget communication and las2peer connectivity.
 
 ## Usage
+For a full example, take a look at the example ROLE widgets in this repository.
 Add iwc.js and las2peerWidgetLibrary.js after y.js and jQuery and before your own scripts.
 ```html
 <!-- import jQuery for AJAX calls -->
@@ -37,28 +38,34 @@ Y({
 
 Initialise the iwc client:
 ```javascript
+...
 var initClient = function(y) {
   this.client = new Las2peerWidgetLibrary("", iwcCallback, "http://127.0.0.1:8073", y);
   console.log("Client initialized");
 };
+...
 ```
 
 If you want to react to messages, you have to define a callback function:
 ```javascript
+...
 var iwcCallback = function (intent) {
   // define your reactions on incoming iwc events here 
 };
+...
 ```
 
 ### Sending messages
 You have to decide on an address for messaging. In the examples we use the title of [ROLE](https://github.com/rwth-acis/ROLE-SDK) widgets.
 An example of sending the content of a textArea locally by using the title of the widget as the address ...
 ```javascript
+...
 var content = document.getElementById('textArea').value;
 // Get widget title
 var sender = $("head").find("title")[0].text;
 //Send locally to widget with title "ReceiveWidget"
 client.sendIntent(sender, "ReceiveWidget", "update", content, false);
+...
 ```
 
 or globally ...
