@@ -74,3 +74,21 @@ client.sendIntent(sender, "ReceiveWidget", "update", content, true);
 ```
 
 ### Receiving messages
+Initialise the client.
+For global messaging, you have to set up y-js in the same way. 
+Then define your callback and execute further actions, e.g. like this:
+```
+var iwcCallback = function (intent) {
+  // define your reactions on incoming iwc events here 
+  if (intent.action == "update" && intent.receiver == $("head").find("title")[0].text) {
+    updateContent(intent.data);
+  }
+};
+
+var updateContent = function (data) {
+  var content = document.getElementById('textArea').value = data;
+};
+```
+Check the action you want to process and that you set during sending, as well as the address you decided on.
+
+That's it! There is (currently) no difference in receiving local or global intents, as they are unpacked and pre-processed by the library.
