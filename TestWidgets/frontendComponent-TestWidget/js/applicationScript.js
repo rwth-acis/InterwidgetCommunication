@@ -67,10 +67,6 @@ var init = function () {
 
 var iwcCallback = function (intent) {
   // define your reactions on incoming iwc events here 
-  //console.log(intent);
-  if (intent.action == "receiveUpdate") {
-    updateContent(intent.data);
-  }
 };
 
 var sendContent = function () {
@@ -86,11 +82,6 @@ var sendContentGlobally = function () {
   var content = document.getElementById('textArea').value;
   var sender = $("head").find("title")[0].text;
   client.sendIntent(sender, "ReceiveWidget", "update", content, true);
-}
-
-// updateContent
-var updateContent = function (content) {
-
 };
 
 $(document).ready(function () {
