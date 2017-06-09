@@ -1,5 +1,5 @@
 # InterwidgetCommunication
-This repository contains JS libraries for interwidget communication and las2peer connectivity.
+This repository contains JS libraries for interwidget communication and las2peer connectivity. The description below shows usage as in the [CAE](https://github.com/rwth-acis/CAE-Model-Persistence-Service/wiki).
 
 ## Usage
 For a full example, take a look at the example ROLE widgets in this repository.
