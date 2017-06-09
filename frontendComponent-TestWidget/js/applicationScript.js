@@ -59,7 +59,7 @@ var init = function () {
   });
 
   var initClient = function(y) {
-    this.client = new Las2peerWidgetLibrary("", iwcCallback, "https://rwth-acis.github.io!", y);
+    this.client = new Las2peerWidgetLibrary("", iwcCallback, "http://role-sandbox.eu", y);
     console.log("Client initialized");
   };
 
