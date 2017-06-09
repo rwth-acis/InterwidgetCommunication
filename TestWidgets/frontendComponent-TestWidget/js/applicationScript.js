@@ -35,7 +35,9 @@ var client;
 var init = function () {
 
   sendContent.bind(this);
+  sendContentGlobally.bind(this);
   $("#sendBtn").click(sendContent);
+  $("#sendGlobalBtn").click(sendContentGlobally);
 
   Y({
     db: {
@@ -65,10 +67,6 @@ var init = function () {
 
 var iwcCallback = function (intent) {
   // define your reactions on incoming iwc events here 
-  //console.log(intent);
-  if (intent.action == "receiveUpdate") {
-    updateContent(intent.data);
-  }
 };
 
 var sendContent = function () {
@@ -80,9 +78,10 @@ var sendContent = function () {
   client.sendIntent(sender, "ReceiveWidget", "update", content, false);
 };
 
-// updateContent
-var updateContent = function (content) {
-
+var sendContentGlobally = function () {
+  var content = document.getElementById('textArea').value;
+  var sender = $("head").find("title")[0].text;
+  client.sendIntent(sender, "ReceiveWidget", "update", content, true);
 };
 
 $(document).ready(function () {
