@@ -70,21 +70,21 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <!-- Bootstrap stylesheet import -->
   <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <!-- own style information -->
-  <link rel="stylesheet" href="http://localhost:8080/frontendComponent-TestWidget/css/style.css">
+  <link rel="stylesheet" href="https://rwth-acis.github.io/InterwidgetCommunication/frontendComponent-TestWidget/css/style.css">
 
   <!-- import jQuery for AJAX calls -->
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
  
   
   <!-- additional widget specific imports (put your own imports here as well) -->
-  <script src="http://localhost:8080/frontendComponent-TestWidget/bower_components/yjs/y.js"></script>
+  <script src="https://rwth-acis.github.io/InterwidgetCommunication/frontendComponent-TestWidget/bower_components/yjs/y.js"></script>
 
   <!-- inter widget communication library import -->
-  <script type="text/javascript" src="http://localhost:8080/frontendComponent-TestWidget/js/lib/iwc.js"></script>
+  <script type="text/javascript" src="https://rwth-acis.github.io/InterwidgetCommunication/frontendComponent-TestWidget/js/lib/iwc.js"></script>
   <!-- import the client library -->
-  <script type="text/javascript" src="http://localhost:8080/frontendComponent-TestWidget/js/lib/las2peerWidgetLibrary.js"></script>
+  <script type="text/javascript" src="https://rwth-acis.github.io/InterwidgetCommunication/frontendComponent-TestWidget/js/lib/las2peerWidgetLibrary.js"></script>
   <!-- import application script -->
-  <script type="text/javascript" src="http://localhost:8080/frontendComponent-TestWidget/js/applicationScript.js"></script>
+  <script type="text/javascript" src="https://rwth-acis.github.io/InterwidgetCommunication/frontendComponent-TestWidget/js/applicationScript.js"></script>
 
 </head>
 <body>
