@@ -39,7 +39,7 @@ var init = function () {
       name: 'websockets-client',
       room: 'cae-room'
     },
-    sourceDir: "http://localhost:8080/frontendComponent-TestWidget/bower_components",
+    sourceDir: "https://rwth-acis.github.io/InterwidgetCommunication/frontendComponent-TestWidget2/bower_components",
     share: {
       textArea: 'Text',
       intents: 'Map'
