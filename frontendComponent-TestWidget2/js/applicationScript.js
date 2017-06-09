@@ -39,14 +39,14 @@ var init = function () {
       name: 'websockets-client',
       room: 'cae-room'
     },
-    sourceDir: "http://localhost:8080/frontendComponent-TestWidget/bower_components",
+    sourceDir: "https://rwth-acis.github.io/InterwidgetCommunication/frontendComponent-TestWidget2/bower_components",
     share: {
       textArea: 'Text',
       intents: 'Map'
     }
   }).then(function (y) {
     console.log("YJS initialized");
-    client = new Las2peerWidgetLibrary("", iwcCallback, "http://127.0.0.1:8073", y);
+    client = new Las2peerWidgetLibrary("", iwcCallback, "http://role-sandbox.eu", y);
   });
 };
 
