@@ -46,7 +46,7 @@ var init = function () {
     }
   }).then(function (y) {
     console.log("YJS initialized");
-    client = new Las2peerWidgetLibrary("", iwcCallback, "http://127.0.0.1:8073", y);
+    client = new Las2peerWidgetLibrary("", iwcCallback, "https://rwth-acis.github.io", y);
   });
 };
 
