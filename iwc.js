@@ -172,7 +172,7 @@
 			console.log(intent);
 			var frames = $(".widget", parent.document).find("iframe");
 			frames.each(function () {
-				if ($(this).contents().find("head").find("title").text() === intent.receiver) {
+				if ($('.widget-title-bar', this.offsetParent).find('span').text() === intent.receiver) {
 					this.contentWindow.postMessage(intent, origin);
 				}
 			});
@@ -232,6 +232,11 @@
 			}
 			return true;
 		};
+
+		/**
+		 * Contains the title of the widget
+		 */
+		IWC.util.Self = $('.widget-title-bar', frameElement.offsetParent).find('span').text();
 
 		return IWC;
 	}
