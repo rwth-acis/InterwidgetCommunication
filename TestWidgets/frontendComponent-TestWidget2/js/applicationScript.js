@@ -52,7 +52,7 @@ var init = function () {
 
 var iwcCallback = function (intent) {
   // define your reactions on incoming iwc events here 
-  if (intent.action == "update" && intent.receiver == $("head").find("title")[0].text) {
+  if (intent.action == "update" && intent.receiver == IWC.util.Self) {
     updateContent(intent.data);
   }
 };
