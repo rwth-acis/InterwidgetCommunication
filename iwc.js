@@ -169,13 +169,21 @@
 
 		var publishLocal = function (intent, origin) {
 			//Find iframe and post message
-			console.log(intent);
-			var frames = $(".widget", parent.document).find("iframe");
-			frames.each(function () {
-				if ($('.widget-title-bar', this.offsetParent).find('span').text() === intent.receiver) {
-					this.contentWindow.postMessage(intent, origin);
-				}
-			});
+			var caeFrames = parent.caeFrames;
+			if (caeFrames) {
+				caeFrames.forEach(function(currVal, currIndex, listObj) {
+					if (currVal.contentWindow.frameElement.id === intent.receiver) {
+						currVal.contentWindow.postMessage(intent, origin);
+					}
+				});
+			} else {
+				var frames = $(".widget", parent.document).find("iframe");
+				frames.each(function () {
+					if ($('.widget-title-bar', this.offsetParent).find('span').text() === intent.receiver) {
+						this.contentWindow.postMessage(intent, origin);
+					}
+				});
+			}
 		};
 
 		var publishGlobal = function (intent, y) {
