@@ -244,7 +244,9 @@
 		/**
 		 * Contains the title of the widget
 		 */
-		IWC.util.Self = $('.widget-title-bar', frameElement.offsetParent).find('span').text();
+		if (frameElement) {
+			IWC.util.Self = $('.widget-title-bar', frameElement.offsetParent).find('span').text();
+		}
 
 		return IWC;
 	}
