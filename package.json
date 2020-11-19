@@ -1,0 +1,14 @@
+{
+  "name": "iwc",
+  "version": "1.0.0",
+  "description": "This contains JS libraries for interwidget communication and las2peer connectivity.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rwth-acis/InterwidgetCommunication.git"
+  },
+  "author": "rwth-acis",
+  "bugs": {
+    "url": "https://github.com/rwth-acis/InterwidgetCommunication/issues"
+  },
+  "homepage": "https://github.com/rwth-acis/InterwidgetCommunication#readme"
+}
