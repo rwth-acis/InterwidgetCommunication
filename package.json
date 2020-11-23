@@ -1,5 +1,5 @@
 {
-  "name": "iwc",
+  "name": "@rwth-acis/iwc",
   "version": "1.0.0",
   "description": "This contains JS libraries for interwidget communication and las2peer connectivity.",
   "repository": {
